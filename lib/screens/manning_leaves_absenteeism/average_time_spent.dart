@@ -124,7 +124,7 @@ List<AVERAGE_TIME_SPENT> parsePhotos(String responseBody) {
   var test1 = json.decode(test);
   var list = test1['AVERAGE_TIME_SPENT'] as List;
 
-  list.map((i) => AVERAGE_TIME_SPENT.fromJson(i)).toList();
+  statusList = list.map((i) => AVERAGE_TIME_SPENT.fromJson(i)).toList();
 
   return statusList;
 

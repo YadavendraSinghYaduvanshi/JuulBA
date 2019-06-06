@@ -41,7 +41,7 @@ class _ManningLeaveListState extends State<ManningLeaveList> {
               title: new Text(
                 "Recruitment TAT store wise – Calculated basis last present date of previous promoter",
                 style: new TextStyle(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic),
               ),
@@ -109,7 +109,7 @@ class _ManningLeaveListState extends State<ManningLeaveList> {
               title: new Text(
                 "Store wise Manned days data for last 6 months",
                 style: new TextStyle(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic),
               ),
@@ -120,7 +120,7 @@ class _ManningLeaveListState extends State<ManningLeaveList> {
               title: new Text(
                 "Promoter wise present days for last 6 months",
                 style: new TextStyle(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic),
               ),
@@ -148,7 +148,7 @@ class _ManningLeaveListState extends State<ManningLeaveList> {
               title: new Text(
                 "Promoter Wise Month Wise Leaves Taken vs Leave Balance on the last day of previous month",
                 style: new TextStyle(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic),
               ),

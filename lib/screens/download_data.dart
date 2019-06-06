@@ -159,7 +159,7 @@ class _DownloadDataState extends State<DownloadData>{
       // will be null if never previously saved
     });
     visit_date = prefs.getString('CURRENTDATE');
-    user_id = prefs.getString('Userid');
+    user_id = prefs.getString('Userid_Main');
 
     showDialog<DialogDemoAction>(
       context: context,

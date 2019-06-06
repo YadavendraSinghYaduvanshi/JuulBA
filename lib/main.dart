@@ -26,8 +26,38 @@ import 'screens/manning_leaves_absenteeism/promoter_wise_present_days.dart';
 import 'screens/self_visitor_login/visitor_login.dart';
 import 'screens/self_visitor_login/no_of_days_worked.dart';
 import 'screens/self_visitor_login/visitor_time_spent.dart';
+import 'screens/supervisor_list.dart';
+import 'maps/geotag_store.dart';
 
-void main() => runApp(new MyApp());
+import 'package:flutter_crashlytics/flutter_crashlytics.dart';
+import 'dart:async';
+
+//void main() => runApp(new MyApp());
+
+void main() async {
+  bool isInDebugMode = false;
+
+  FlutterError.onError = (FlutterErrorDetails details) {
+    if (isInDebugMode) {
+      // In development mode simply print to console.
+      FlutterError.dumpErrorToConsole(details);
+    } else {
+      // In production mode report to the application zone to report to
+      // Crashlytics.
+      Zone.current.handleUncaughtError(details.exception, details.stack);
+    }
+  };
+
+  await FlutterCrashlytics().initialize();
+
+  runZoned<Future<Null>>(() async {
+    runApp(MyApp());
+  }, onError: (error, stackTrace) async {
+    // Whenever an error occurs, call the `reportCrash` function. This will send
+    // Dart errors to our dev console or Crashlytics depending on the environment.
+    await FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
+  });
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -61,6 +91,8 @@ class MyApp extends StatelessWidget {
         '/VisitorLogin': (BuildContext context)=>new VisitorLogin(),
         '/NoDaysWorked': (BuildContext context)=>new NoDaysWorked(),
         '/VisitorTimeSpent': (BuildContext context)=>new VisitorTimeSpent(),
+        '/SupervisorList': (BuildContext context)=>new SupervisorList(),
+        '/geotagstore': (BuildContext context)=>new GeoTagStore(),
         //'/NonWorking': (BuildContext context)=>new NonWorking(),
         //'/CameraApp': (BuildContext context)=>new CameraExampleHome(),
       },

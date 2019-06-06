@@ -53,7 +53,7 @@ class AppPageRoute extends MaterialPageRoute<String> {
     _internalCupertinoPageRoute ??= new CupertinoPageRoute<String>(
       builder: builder,
       fullscreenDialog: fullscreenDialog,
-      hostRoute: this,
+
     );
     return _internalCupertinoPageRoute;
   }

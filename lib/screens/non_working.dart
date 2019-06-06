@@ -9,9 +9,8 @@ import 'package:camera/camera.dart';
 import 'camera_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:dio/dio.dart';
-import 'package:image/image.dart' as Im;
+import 'package:image/image.dart' as img;
 
 class NonWorking extends StatefulWidget {
   JCPGetterSetter store_data;
@@ -31,7 +30,7 @@ class Reason {
 
 class _NonWorkingState extends State<NonWorking> {
   NonWorkingReasonGetterSetter selectedReason;
-
+  bool isCompressed = false;
   /*List<Reason> reasonList = <Reason>[
     const Reason('Present'),
     const Reason('Leave'),
@@ -292,7 +291,9 @@ class _NonWorkingState extends State<NonWorking> {
   }
 
   Upload(File imageFile, String img_name) async {
-
+    if(!isCompressed){
+      await compressImage(filePath);
+    }
     //String uploadURL = "http://lipromo.parinaam.in/Webservice/Liwebservice.svc/GetImages";
     String uploadURL = "http://lipromo.parinaam.in/LoralMerchandising.asmx/Uploadimages";
     Dio dio = new Dio();
@@ -377,27 +378,28 @@ class _NonWorkingState extends State<NonWorking> {
       filePath = '$dirPath/' + result_path;
       setState(() {});
 
-      await compressImage(null, filePath);
+      //await compressImage(filePath);
     }
   }
 
-  void compressImage(File imageFile, String file_path) async {
+  Future<Null> compressImage(String file_path) async {
 
-    imageFile = new File(file_path);
+    File imageFile = new File(file_path);
 
-    Im.Image image = Im.decodeImage(imageFile.readAsBytesSync());
-    Im.Image smallerImage = Im.copyResize(image, 600); // choose the size here, it will maintain aspect ratio
+    img.Image image = img.decodeImage(imageFile.readAsBytesSync());
+    img.Image smallerImage = img.copyResize(image, width:600); // choose the size here, it will maintain aspect ratio
 
-    var compressedImage = new File('$file_path')..writeAsBytesSync(Im.encodeJpg(smallerImage, quality: 90));
+    var compressedImage = new File('$file_path')..writeAsBytesSync(img.encodeJpg(smallerImage, quality: 90));
+    isCompressed = true;
   }
 
   String _fileContents;
-  Future<Null> _uploadFile(File file, String file_name) async {
-    /* final Directory systemTempDir = Directory.systemTemp;
+ /* Future<Null> _uploadFile(File file, String file_name) async {
+    *//* final Directory systemTempDir = Directory.systemTemp;
     final File file = await new File('${systemTempDir.path}/foo.txt').create();
    file.writeAsString(kTestString);
     assert(await file.readAsString() == kTestString);
-    final String rand = "${new Random().nextInt(10000)}";*/
+    final String rand = "${new Random().nextInt(10000)}";*//*
     final StorageReference ref =
     FirebaseStorage.instance.ref().child(file_name);
     final StorageUploadTask uploadTask = ref.put(
@@ -414,7 +416,7 @@ class _NonWorkingState extends State<NonWorking> {
     }
     Navigator.pop(context, DialogDemoAction.cancel);
     Navigator.of(context).pop("saved");
-  }
+  }*/
 
   void logError(String code, String message) =>
       print('Error: $code\nError Message: $message');
@@ -431,7 +433,7 @@ class _NonWorkingState extends State<NonWorking> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       prefs = sp;
       visit_date = prefs.getString('CURRENTDATE');
-      user_id = prefs.getString('Userid');
+      user_id = prefs.getString('Userid_Main');
       // will be null if never previously saved
     });
     visit_date = prefs.getString('CURRENTDATE');

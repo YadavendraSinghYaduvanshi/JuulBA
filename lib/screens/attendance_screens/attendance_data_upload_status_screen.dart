@@ -85,7 +85,8 @@ class _AttendanceDataUploadstatusState
                   if (snapshot.hasError) print(snapshot.error);
                   //_loadCounter();
                   return snapshot.hasData
-                      ? StatusList(status: snapshot.data)
+                      ?(snapshot.data.length>0? StatusList(status: snapshot.data): new Center(child: new Card(child: new Container(margin: EdgeInsets.all(5.0),
+                    child: new Text("No Data found", style: TextStyle(fontSize: 20.0),),),),))
                       : Center(child: CircularProgressIndicator());
                 },
               ))
@@ -135,9 +136,14 @@ class _AttendanceDataUploadstatusState
 List<ATTENDANCE_DATAUPLOAD_STATUS> parsePhotos(String responseBody) {
   var test = json.decode(responseBody);
 
+  List<ATTENDANCE_DATAUPLOAD_STATUS> statusList = new List();
+  if(test==""){
+    return statusList;
+  }
+
   var test1 = json.decode(test);
   var list = test1['ATTENDANCE_DATAUPLOAD_STATUS'] as List;
-  List<ATTENDANCE_DATAUPLOAD_STATUS> statusList =
+  statusList =
       list.map((i) => ATTENDANCE_DATAUPLOAD_STATUS.fromJson(i)).toList();
 
   return statusList;

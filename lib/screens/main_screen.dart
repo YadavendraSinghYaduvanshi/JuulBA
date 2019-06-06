@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:loreal_isp_supervisor_flutter/database/database.dart';
 import 'store_list.dart';
+import 'supervisor_list.dart';
+import 'package:loreal_isp_supervisor_flutter/screens/menu_screen.dart';
 
 import 'package:async/async.dart';
 import 'dart:io';
@@ -62,7 +64,7 @@ class _Main_ActivityState extends State<Main_Activity>
 
   var notice_url = "http://gskgtm.parinaam.in/notice/notice.html";
   var visit_date;
-  static var userId;
+  static var userId, designation;
 
   static BuildContext context_global;
 
@@ -84,12 +86,12 @@ class _Main_ActivityState extends State<Main_Activity>
                   child: new Container(
                 child: new Center(
                   child: new Image(
-                    image: new AssetImage('assets/loreal1.png'),
-                    height: 37.2,
-                    width: 204.0,
+                    image: new AssetImage('assets/juul_logo.png'),
+                    height: 100.0,
+                    width: 100.0,
                   ),
                 ),
-                height: 60.0,
+                height: 100.0,
               )),
               new SizedBox(height: 10.0),
               new Text(profile_name,
@@ -109,7 +111,22 @@ class _Main_ActivityState extends State<Main_Activity>
       onTap: () {
         print("Reports clicked");
         Navigator.of(context_global).pop();
-        Navigator.of(context_global).pushNamed('/Reports');
+        if(designation=="Supervisor"){
+
+          setSupervisor(userId, designation);
+          Navigator.of(context_global).pushNamed('/Reports');
+
+        }
+        else{
+          //Navigator.of(context_global).pushNamed('/SupervisorList');
+          Navigator.push(
+            context_global,
+            MaterialPageRoute(
+              builder: (context) => SupervisorList(),
+            ),
+          );
+        }
+
       },
       child: new Container(
         child: new Row(children: <Widget>[
@@ -121,6 +138,15 @@ class _Main_ActivityState extends State<Main_Activity>
           home
         ]),
       ));
+
+  //set preference data
+  static Future setSupervisor(var user_id, var designation) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('Userid', user_id);
+    await prefs.setString('Designation', designation);
+
+  }
 
   static Text daily_entry = new Text("Daily Entry",
       style: new TextStyle(
@@ -134,7 +160,7 @@ class _Main_ActivityState extends State<Main_Activity>
         Navigator.push(
           context_global,
           MaterialPageRoute(
-            builder: (context) => StoreList(deviation_flag: 0),
+            builder: (context) => MenuScreen(),
           ),
         );
       },
@@ -149,7 +175,7 @@ class _Main_ActivityState extends State<Main_Activity>
         ]),
       ));
 
-  static Text groups = new Text("Deviation",
+  static Text groups = new Text("Geotag",
       style: new TextStyle(
           color: Colors.blue, fontSize: 20.0, fontStyle: FontStyle.normal));
 
@@ -158,12 +184,8 @@ class _Main_ActivityState extends State<Main_Activity>
         print("Mark Attendance");
         Navigator.of(context_global).pop();
         //Navigator.of(context_global).pushNamed('/MarkAttendance');
-        Navigator.push(
-          context_global,
-          MaterialPageRoute(
-            builder: (context) => StoreList(deviation_flag: 1),
-          ),
-        );
+        print("Download");
+        Navigator.of(context_global).pushNamed('/geotagstore');
       },
       child: new Container(
         child: new Row(children: <Widget>[
@@ -250,6 +272,7 @@ class _Main_ActivityState extends State<Main_Activity>
     padding3,
     padding4,
     padding5,
+    padding6,
   ];
   static ListView listview = new ListView(children: children);
   Drawer drawer = new Drawer(
@@ -276,7 +299,7 @@ class _Main_ActivityState extends State<Main_Activity>
     return new Scaffold(
       drawer: drawer,
       appBar: new AppBar(
-        title: new Text("Loreal ISP Supervisor"),
+        title: new Text("Juul Brand Ambassador"),
         backgroundColor: Colors.blue,
       ),
       body: new Container(
@@ -305,7 +328,8 @@ class _Main_ActivityState extends State<Main_Activity>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     visit_date = prefs.getString('CURRENTDATE');
     notice_url = prefs.getString('Notice');
-    userId = prefs.getString('Userid');
+    userId = prefs.getString('Userid_Main');
+    designation = prefs.getString('Designation_Main');
     //_fetchData(userId);
   }
 

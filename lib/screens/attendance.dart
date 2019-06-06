@@ -48,12 +48,13 @@ class _AttendanceListState extends State<AttendanceList> {
             ),
             onTap: () {
               print("attendance");
-              if(designation=="Supervisor"){
+              Navigator.of(context).pushNamed('/PromoterList');
+         /*     if(designation=="Supervisor"){
                 Navigator.of(context).pushNamed('/PromoterList');
               }
               else{
 
-              }
+              }*/
 
             },
           ),
@@ -105,7 +106,7 @@ class _AttendanceListState extends State<AttendanceList> {
             title: new Text(
               "Vacancies as on date – Store Name comparison with the last Present date of 1st / 2nd / 3rd promoter in that store",
               style: new TextStyle(
-                  color: Colors.blue,
+                  color: Colors.grey,
                   fontSize: 20.0,
                   fontStyle: FontStyle.italic),
             ),

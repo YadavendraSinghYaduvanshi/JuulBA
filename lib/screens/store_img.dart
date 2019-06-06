@@ -37,7 +37,6 @@ class _StoreImageState extends State<StoreImage> {
   void initState() {
     // TODO: implement initState
     _loadCounter(widget.store_data);
-
     super.initState();
   }
 
@@ -121,12 +120,12 @@ class _StoreImageState extends State<StoreImage> {
 
   //--------------------------
 
-  Future<Null> compressImage(String file_path) async {
+  Future compressImage(String file_path) async {
 
     File imageFile = new File(file_path);
 
     Im.Image image = Im.decodeImage(imageFile.readAsBytesSync());
-    Im.Image smallerImage = Im.copyResize(image, 600); // choose the size here, it will maintain aspect ratio
+    Im.Image smallerImage = Im.copyResize(image, width:600); // choose the size here, it will maintain aspect ratio
 
     var compressedImage = new File('$file_path')..writeAsBytesSync(Im.encodeJpg(smallerImage, quality: 90));
     isCompressed = true;
@@ -221,7 +220,7 @@ class _StoreImageState extends State<StoreImage> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       prefs = sp;
       visit_date = prefs.getString('CURRENTDATE');
-      user_id = prefs.getString('Userid');
+      user_id = prefs.getString('Userid_Main');
       // will be null if never previously saved
     });
     visit_date = prefs.getString('CURRENTDATE');

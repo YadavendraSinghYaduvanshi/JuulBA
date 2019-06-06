@@ -12,16 +12,17 @@ dependencies:
   shared_preferences: "0.4.2"
   sqflite: "^0.11.0"
   device_info: "^0.2.1"
-  camera: ^0.2.1
+  camera: ^0.5.2+1
   video_player: "0.5.2"
   path_provider: ^0.4.1
-  simple_permissions: ^0.1.5
-  cloud_firestore: ^0.7.4
-  firebase_storage: ^1.0.1
+  flutter_crashlytics: ^0.1.1
   dio: ^1.0.0
   image: ^2.0.4
   package_info: ^0.3.2
   url_launcher: ^3.0.3
+  google_maps_flutter: ^0.5.15
+  geolocator: '^5.0.0'
+  permission_handler: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,13 @@ flutter:
         - assets/camera_icon_tick.png
         - assets/tick_icon.png
         - assets/deviation.png
+        - assets/juul.gif
+        - assets/juul_1.gif
+        - assets/juul_logo.png
+        - assets/grooming.png
+        - assets/grooming_green.png
+        - assets/customer_connect_.png
+        - assets/customer_connect_done_.png
 
   # assets:
   #  - images/a_dot_burr.jpeg

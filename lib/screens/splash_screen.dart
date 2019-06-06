@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             new Container(
               margin: new EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
               child: new Image(
-                image: new AssetImage('assets/loreal_aish.gif'),
+                image: new AssetImage('assets/juul.gif'),
                 height: 200.0,
                 width: 200.0,
               ),
@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
               margin: new EdgeInsets.symmetric(vertical: 20.0),
               child: new Center(
                 child: new Image(
-                  image: new AssetImage('assets/loreal1.png'),
+                  image: new AssetImage('assets/juul_logo.png'),
                   height: 200.0,
                   width: 200.0,
                 ),
@@ -63,10 +63,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future goToHomePage() async {
-    await new Future.delayed(const Duration(milliseconds: 5000));
+    await new Future.delayed(const Duration(milliseconds: 7000));
    /* Navigator.of(context).pop();
     Navigator.of(context).push(new AppPageRoute(builder: (BuildContext context) => new LoginNew()));*/
 
+    //Route route = MaterialPageRoute(builder: (context) => MyPermissionClass());
     Route route = MaterialPageRoute(builder: (context) => LoginNew());
     Navigator.pushReplacement(context, route);
   }

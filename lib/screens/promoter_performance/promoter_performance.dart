@@ -41,7 +41,7 @@ class _PerformanceListState extends State<PerformanceList> {
               title: new Text(
                 "Promoter Wise Incentive Earned on each parameter vs the Slabs",
                 style: new TextStyle(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic),
               ),
@@ -62,7 +62,7 @@ class _PerformanceListState extends State<PerformanceList> {
               title: new Text(
                 "Over All Sales – Tgt vs Ach for last 6 months",
                 style: new TextStyle(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic),
               ),
@@ -77,7 +77,7 @@ class _PerformanceListState extends State<PerformanceList> {
               title: new Text(
                 "Focus Pack - Tgt vs Ach for last 6 months",
                 style: new TextStyle(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     fontSize: 20.0,
                     fontStyle: FontStyle.italic),
               ),

@@ -46,7 +46,7 @@ class _AttendanceTgtVsAchPlannedLoginsState
                       new Expanded(
                         child: new Center(
                           child: new Text(
-                            "JCP Date",
+                            "Promoter",
                             style: new TextStyle(
                                 color: Colors.black,
                                 fontSize: 18.0,
@@ -57,7 +57,7 @@ class _AttendanceTgtVsAchPlannedLoginsState
                       new Expanded(
                         child: new Center(
                           child: new Text(
-                            "Upload Status",
+                            "Planned",
                             style: new TextStyle(
                                 color: Colors.black,
                                 fontSize: 18.0,
@@ -68,7 +68,7 @@ class _AttendanceTgtVsAchPlannedLoginsState
                       new Expanded(
                         child: new Center(
                           child: new Text(
-                            "Attendance",
+                            "Covered",
                             style: new TextStyle(
                                 color: Colors.black,
                                 fontSize: 18.0,
@@ -155,8 +155,8 @@ List<TARGET_VS_ACH_PLANNED_LOGINS> parsePhotos(String responseBody) {
 
 class TARGET_VS_ACH_PLANNED_LOGINS {
   final String PROMOTER;
-  final String PLANNED;
-  final String COVERED;
+  final int PLANNED;
+  final int COVERED;
 
   TARGET_VS_ACH_PLANNED_LOGINS(
       {this.PROMOTER, this.PLANNED, this.COVERED});
@@ -164,8 +164,8 @@ class TARGET_VS_ACH_PLANNED_LOGINS {
   factory TARGET_VS_ACH_PLANNED_LOGINS.fromJson(Map<String, dynamic> json) {
     return TARGET_VS_ACH_PLANNED_LOGINS(
       PROMOTER: json['PROMOTER'] as String,
-      PLANNED: json['PLANNED'] as String,
-      COVERED: json['COVERED'] as String,
+      PLANNED: json['PLANNED'] as int,
+      COVERED: json['COVERED'] as int,
     );
   }
 }
@@ -208,7 +208,7 @@ class StatusList extends StatelessWidget {
                     new Expanded(
                         child: new Center(
                           child: new Text(
-                            status[index].PLANNED,
+                            status[index].PLANNED.toString(),
                             style: new TextStyle(
                                 color: Colors.black,
                                 fontSize: 20.0,
@@ -218,7 +218,7 @@ class StatusList extends StatelessWidget {
                     new Expanded(
                         child: new Center(
                           child: new Text(
-                            status[index].COVERED,
+                            status[index].COVERED.toString(),
                             style: new TextStyle(
                                 color: Colors.black,
                                 fontSize: 20.0,
